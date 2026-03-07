@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartBook AI for Dental Practices — Never Miss a Patient Call Again</title>
+  <meta name="description" content="The average dental practice misses 23% of inbound calls. SmartBook AI answers every call 24/7, books appointments live, and syncs with your schedule. $497/mo. 48-hour setup." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:        #00a896;
+      --teal-dark:   #007a6b;
+      --teal-light:  #e6f7f5;
+      --teal-pale:   #f0fbfa;
+      --navy:        #1a3040;
+      --navy-light:  #2a4a60;
+      --text:        #1a3040;
+      --muted:       #5a7080;
+      --border:      #dde8ee;
+      --white:       #ffffff;
+      --off-white:   #f5f9fc;
+      --red:         #e84040;
+      --red-bg:      #fff0f0;
+      --radius:      12px;
+      --shadow:      0 2px 16px rgba(26,48,64,0.08);
+      --shadow-lg:   0 8px 40px rgba(26,48,64,0.12);
+      --font:        'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { color: var(--teal-dark); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--navy);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 66px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.2px;
+    }
+    .nav-logo span { color: var(--teal); }
+
+    .nav-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(0,168,150,0.2);
+      color: #5dddd4;
+      border: 1px solid rgba(0,168,150,0.35);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .nav-cta {
+      background: var(--teal);
+      color: var(--white);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.55rem 1.3rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--teal-dark); color: var(--white); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 9rem 5% 5rem;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 60px;
+      background: var(--white);
+      clip-path: ellipse(60% 100% at 50% 100%);
+    }
+
+    .hero-inner {
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,168,150,0.15);
+      border: 1px solid rgba(0,168,150,0.3);
+      color: #5dddd4;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      padding: 0.3rem 0.85rem;
+      border-radius: 99px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: rgba(255,255,255,0.65);
+      max-width: 560px;
+      margin-bottom: 2.2rem;
+      line-height: 1.7;
+    }
+
+    .hero-sub strong { color: rgba(255,255,255,0.9); }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--teal);
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--teal-dark); color: var(--white); transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.82rem 1.5rem;
+      border-radius: 8px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ── STAT BANNER ── */
+    .stat-banner {
+      background: #fff3cd;
+      border-top: 3px solid #e6a800;
+      padding: 2rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+    }
+
+    .stat-text strong {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .stat-text span {
+      font-size: 0.9rem;
+      color: #7a5a00;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 5.5rem 5%; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+      color: var(--navy);
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── PAIN SECTION ── */
+    .pain { background: var(--off-white); }
+
+    .pain-timeline {
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2rem;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .timeline-item + .timeline-item {
+      margin-top: 0;
+    }
+
+    .timeline-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 44px;
+    }
+
+    .timeline-dot {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      background: var(--red-bg);
+      border: 2px solid #ffa0a0;
+    }
+
+    .timeline-line {
+      width: 2px;
+      flex: 1;
+      background: var(--border);
+      min-height: 2rem;
+      margin: 0 auto;
+    }
+
+    .timeline-item:last-child .timeline-line { display: none; }
+
+    .timeline-content {
+      padding-bottom: 2rem;
+      flex: 1;
+    }
+
+    .timeline-time {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--red);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-content h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ── SOLUTION ── */
+    .solution { background: var(--white); }
+
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .solution-card {
+      background: var(--teal-pale);
+      border: 1px solid rgba(0,168,150,0.2);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+    }
+
+    .solution-card .s-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .solution-card h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .solution-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── ROI BANNER ── */
+    .roi-banner {
+      background: var(--navy);
+      padding: 4rem 5%;
+      text-align: center;
+    }
+
+    .roi-banner .roi-card {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .roi-banner h2 {
+      color: var(--white);
+      margin-bottom: 1rem;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+    }
+
+    .roi-banner h2 em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    .roi-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 2.5rem 0;
+    }
+
+    .roi-fact {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 1.3rem;
+    }
+
+    .roi-fact strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .roi-fact span {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .roi-banner .roi-note {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.5rem;
+    }
+
+    /* ── PRICING ── */
+    .pricing { background: var(--off-white); }
+
+    .price-card {
+      background: var(--white);
+      border: 2px solid var(--teal);
+      border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 440px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: 1.2rem; right: -2rem;
+      background: var(--teal);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.25rem 3rem;
+      transform: rotate(35deg);
+    }
+
+    .price-card .price-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .price-main {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .price-main .currency { font-size: 1.4rem; color: var(--muted); align-self: flex-start; padding-top: 0.35rem; }
+    .price-main .amount  { font-size: 3rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; }
+    .price-main .period  { font-size: 1rem; color: var(--muted); }
+
+    .price-tagline {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .price-tagline strong { color: var(--navy); }
+
+    .price-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .price-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.91rem;
+      color: var(--text);
+    }
+
+    .price-list li::before {
+      content: '✓';
+      color: var(--teal);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .price-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ── CTA FOOTER ── */
+    .cta-footer {
+      background: var(--teal);
+      padding: 6rem 5%;
+      text-align: center;
+    }
+
+    .cta-footer h2 {
+      color: var(--white);
+      max-width: 520px;
+      margin: 0 auto 1rem;
+    }
+
+    .cta-footer p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      max-width: 420px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--white);
+      color: var(--teal-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); color: var(--teal-dark); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 1.8rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer .footer-logo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    footer .footer-logo span { color: var(--teal); }
+
+    footer p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 4%; }
+      .nav-badge { display: none; }
+      section { padding: 4rem 5%; }
+      .hero { padding: 7.5rem 5% 5rem; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">SmartBook <span>AI</span></div>
+    <div class="nav-right">
+      <span class="nav-badge">Dental</span>
+      <a href="mailto:hello@pantrymate.net" class="nav-cta">See a Live Demo</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">🦷 Built for Dental Practices</div>
+      <h1>Your front desk is missing calls.<br /><em>Patients are booking someone else.</em></h1>
+      <p class="hero-sub">
+        Every unanswered call is a patient who opened Google, found the next practice, and <strong>booked with them instead</strong>. SmartBook answers every call, 24/7.
+      </p>
+      <div class="hero-actions">
+        <a href="mailto:hello@pantrymate.net" class="btn-primary">See a live demo →</a>
+        <a href="#how-it-works" class="btn-outline">How it works ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT BANNER -->
+  <div class="stat-banner">
+    <div class="stat-icon">📊</div>
+    <div class="stat-text">
+      <strong>1 in 4 calls to the average dental practice goes unanswered.</strong>
+      <span>Industry data: dental practices miss an average of 23% of inbound calls · Most missed calls never call back</span>
+    </div>
+  </div>
+
+  <!-- PAIN -->
+  <section class="pain" id="pain">
+    <div class="section-label">The Problem</div>
+    <h2>Your phones ring when your team can't answer.</h2>
+    <p class="section-sub">It's not your team's fault. But the patient on the other end doesn't know that.</p>
+
+    <div class="pain-timeline">
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot">🌙</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-time">After hours — 5:30 PM</div>
+          <h3>Phone rings. Nobody's there.</h3>
+          <p>Patient has a toothache. Your practice is closed. They call. It rings out. They call the next practice on Google who has a 24/7 answering service. That's a patient — and $2,000+ in lifetime value — gone.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot">🥗</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-time">Lunch break — 12:15 PM</div>
+          <h3>Everyone's on lunch. Calls stack up.</h3>
+          <p>New patient found you on Google Maps. Wants to book a clean and check. Calls twice, gets voicemail. Doesn't leave one. Books elsewhere. You never knew they called.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot">📞</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-time">Busy morning — 9:45 AM</div>
+          <h3>Receptionist is with a patient. Phones ring out.</h3>
+          <p>Your front desk is doing three things at once. They can't pick up. The caller hears ringing. They hang up after the fourth ring. That's a real person who wanted to be your patient.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot">📉</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-time">End of month</div>
+          <h3>You count the chair time you didn't fill.</h3>
+          <p>You don't have a data problem — you have a missed-call problem. The patients were there. They called. They just couldn't get through.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="solution" id="how-it-works">
+    <div class="section-label">The Solution</div>
+    <h2>SmartBook answers. Books. Confirms. Done.</h2>
+    <p class="section-sub">A real AI voice agent — not a voicemail, not a bot maze — that handles the call from hello to booking confirmation.</p>
+
+    <div class="solution-grid">
+      <div class="solution-card">
+        <div class="s-icon">📲</div>
+        <h3>Every call answered, 24/7</h3>
+        <p>After hours, weekends, lunch breaks, Monday mornings. SmartBook picks up on the second ring, every time. No hold music. No "press 1 for appointments."</p>
+      </div>
+
+      <div class="solution-card">
+        <div class="s-icon">📅</div>
+        <h3>Books the appointment live</h3>
+        <p>SmartBook checks your real-time availability and books the patient directly into your schedule. No callback needed. The slot is filled before they hang up.</p>
+      </div>
+
+      <div class="solution-card">
+        <div class="s-icon">💬</div>
+        <h3>SMS confirmation + reminders</h3>
+        <p>Automatically texts the patient a confirmation with their appointment details. Follow-up reminders cut no-shows without your team lifting a finger.</p>
+      </div>
+
+      <div class="solution-card">
+        <div class="s-icon">🔗</div>
+        <h3>Syncs with your schedule</h3>
+        <p>Connects to your practice management software. No double-booking, no manual entry. SmartBook reads your availability and fills it — that's it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI BANNER -->
+  <div class="roi-banner">
+    <div class="roi-card">
+      <h2>1 missed new patient = <em>$2,000+ lifetime value.</em><br />SmartBook pays for itself in week 1.</h2>
+
+      <div class="roi-facts">
+        <div class="roi-fact">
+          <strong>$2,000+</strong>
+          <span>Avg patient lifetime value</span>
+        </div>
+        <div class="roi-fact">
+          <strong>23%</strong>
+          <span>Calls missed on average</span>
+        </div>
+        <div class="roi-fact">
+          <strong>$497</strong>
+          <span>Monthly cost of SmartBook</span>
+        </div>
+        <div class="roi-fact">
+          <strong>1 patient</strong>
+          <span>To cover month 1</span>
+        </div>
+      </div>
+
+      <p style="color:rgba(255,255,255,0.7); font-size:0.95rem; max-width:500px; margin:0 auto 2rem;">
+        If you see 80 new patient calls a month and miss 23% of them, that's 18 missed patients. At $2,000 lifetime value each — that's $36,000 walking out the door every month. SmartBook costs $497.
+      </p>
+
+      <a href="mailto:hello@pantrymate.net" class="btn-primary" style="font-size:1rem;">
+        See a live demo →
+      </a>
+
+      <p class="roi-note">48-hour setup · No contracts · Works with your existing phone number</p>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="section-label">Pricing</div>
+    <h2>One flat fee. No surprises.</h2>
+    <p class="section-sub">No per-minute charges. No setup complexity. Just one price that covers everything.</p>
+
+    <div class="price-card">
+      <div class="price-label">SmartBook AI — Dental</div>
+      <div class="price-main">
+        <span class="currency">$</span>
+        <span class="amount">497</span>
+        <span class="period">/mo</span>
+      </div>
+      <div class="price-tagline">
+        <strong>No contracts.</strong> 48-hour setup. Cancel any time.
+      </div>
+
+      <ul class="price-list">
+        <li>24/7 AI phone answering — <strong>never misses a call</strong></li>
+        <li>Live appointment booking — syncs with your schedule</li>
+        <li>SMS confirmation and reminder messages</li>
+        <li>Works with your existing phone number</li>
+        <li>Caller intent detection (new patient vs existing vs emergency)</li>
+        <li>Weekly missed-call reports so you see what you were leaving on the table</li>
+        <li>48-hour setup — we handle the whole thing</li>
+      </ul>
+
+      <a href="mailto:hello@pantrymate.net" class="btn-primary" style="width:100%; justify-content:center; font-size:1rem;">
+        See a live demo →
+      </a>
+      <p class="price-note">No credit card needed to talk to us. 15 minutes, no pressure.</p>
+    </div>
+  </section>
+
+  <!-- CTA FOOTER -->
+  <section class="cta-footer">
+    <h2>Stop finding out about missed patients at end of month.</h2>
+    <p>SmartBook picks up every call. Books every willing patient. Your front desk gets their sanity back.</p>
+    <a href="mailto:hello@pantrymate.net" class="btn-white">See a live demo →</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">SmartBook <span>AI</span></div>
+    <p>© 2026 SmartBook AI · hello@pantrymate.net · $497/mo · No contracts</p>
+  </footer>
+
+</body>
+</html>
