@@ -26,8 +26,8 @@
       --red:         #e84040;
       --red-bg:      #fff0f0;
       --radius:      12px;
-      --shadow:      0 2px 16px rgba(26,48,64,0.08);
-      --shadow-lg:   0 8px 40px rgba(26,48,64,0.12);
+      --shadow:      0 2px 12px rgba(26,48,64,0.06), 0 8px 40px rgba(26,48,64,0.08);
+      --shadow-lg:   0 4px 24px rgba(26,48,64,0.1), 0 16px 60px rgba(26,48,64,0.12);
       --font:        'Inter', system-ui, sans-serif;
     }
 
@@ -41,21 +41,45 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Noise texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.02;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
     a { color: var(--teal); text-decoration: none; }
     a:hover { color: var(--teal-dark); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(.16,1,.3,1), transform 0.6s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
 
     /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: var(--navy);
+      background: rgba(26,48,64,0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       padding: 0 5%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 66px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.2);
     }
 
     .nav-logo {
@@ -85,9 +109,14 @@
       font-weight: 600;
       padding: 0.55rem 1.3rem;
       border-radius: 6px;
-      transition: background 0.2s;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,168,150,0.4);
     }
-    .nav-cta:hover { background: var(--teal-dark); color: var(--white); }
+    .nav-cta:hover {
+      background: var(--teal-dark);
+      color: var(--white);
+      box-shadow: 0 6px 30px rgba(0,168,150,0.6);
+    }
 
     .nav-right {
       display: flex;
@@ -98,9 +127,33 @@
     /* ── HERO ── */
     .hero {
       padding: 9rem 5% 5rem;
-      background: var(--navy);
+      background: #1a3040;
       position: relative;
       overflow: hidden;
+    }
+
+    /* Teal orbs for hero glow */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .hero-orb-1 {
+      width: 520px;
+      height: 520px;
+      background: #00a896;
+      opacity: 0.08;
+      top: -140px;
+      left: -80px;
+    }
+    .hero-orb-2 {
+      width: 420px;
+      height: 420px;
+      background: #00a896;
+      opacity: 0.08;
+      top: -80px;
+      right: 5%;
     }
 
     .hero::after {
@@ -115,6 +168,8 @@
 
     .hero-inner {
       max-width: 700px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-eyebrow {
@@ -174,9 +229,15 @@
       font-weight: 600;
       padding: 0.85rem 2rem;
       border-radius: 8px;
-      transition: background 0.2s, transform 0.15s;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,168,150,0.4);
     }
-    .btn-primary:hover { background: var(--teal-dark); color: var(--white); transform: translateY(-1px); }
+    .btn-primary:hover {
+      background: var(--teal-dark);
+      color: var(--white);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 30px rgba(0,168,150,0.6);
+    }
 
     .btn-outline {
       display: inline-flex;
@@ -343,6 +404,13 @@
       border: 1px solid rgba(0,168,150,0.2);
       border-radius: var(--radius);
       padding: 1.8rem;
+      box-shadow: 0 2px 12px rgba(26,48,64,0.06), 0 8px 40px rgba(26,48,64,0.08);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .solution-card:hover {
+      box-shadow: 0 4px 24px rgba(26,48,64,0.1), 0 16px 60px rgba(26,48,64,0.12);
+      transform: translateY(-2px);
     }
 
     .solution-card .s-icon {
@@ -398,6 +466,13 @@
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 10px;
       padding: 1.3rem;
+      box-shadow: 0 2px 12px rgba(26,48,64,0.06), 0 8px 40px rgba(26,48,64,0.08);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .roi-fact:hover {
+      box-shadow: 0 4px 24px rgba(26,48,64,0.1), 0 16px 60px rgba(26,48,64,0.12);
+      transform: translateY(-2px);
     }
 
     .roi-fact strong {
@@ -428,9 +503,15 @@
       border-radius: 16px;
       padding: 2.5rem;
       max-width: 440px;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 2px 12px rgba(26,48,64,0.06), 0 8px 40px rgba(26,48,64,0.08);
       position: relative;
       overflow: hidden;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .price-card:hover {
+      box-shadow: 0 4px 24px rgba(26,48,64,0.1), 0 16px 60px rgba(26,48,64,0.12);
+      transform: translateY(-2px);
     }
 
     .price-card::before {
@@ -588,6 +669,8 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
     <div class="hero-inner">
       <div class="hero-eyebrow">🦷 Built for Dental Practices</div>
       <h1>Your front desk is missing calls.<br /><em>Patients are booking someone else.</em></h1>
@@ -602,7 +685,7 @@
   </section>
 
   <!-- STAT BANNER -->
-  <div class="stat-banner">
+  <div class="stat-banner reveal">
     <div class="stat-icon">📊</div>
     <div class="stat-text">
       <strong>1 in 4 calls to the average dental practice goes unanswered.</strong>
@@ -617,7 +700,7 @@
     <p class="section-sub">It's not your team's fault. But the patient on the other end doesn't know that.</p>
 
     <div class="pain-timeline">
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-left">
           <div class="timeline-dot">🌙</div>
           <div class="timeline-line"></div>
@@ -629,7 +712,7 @@
         </div>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-left">
           <div class="timeline-dot">🥗</div>
           <div class="timeline-line"></div>
@@ -641,7 +724,7 @@
         </div>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-left">
           <div class="timeline-dot">📞</div>
           <div class="timeline-line"></div>
@@ -653,7 +736,7 @@
         </div>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-left">
           <div class="timeline-dot">📉</div>
           <div class="timeline-line"></div>
@@ -674,25 +757,25 @@
     <p class="section-sub">A real AI voice agent — not a voicemail, not a bot maze — that handles the call from hello to booking confirmation.</p>
 
     <div class="solution-grid">
-      <div class="solution-card">
+      <div class="solution-card reveal">
         <div class="s-icon">📲</div>
         <h3>Every call answered, 24/7</h3>
         <p>After hours, weekends, lunch breaks, Monday mornings. SmartBook picks up on the second ring, every time. No hold music. No "press 1 for appointments."</p>
       </div>
 
-      <div class="solution-card">
+      <div class="solution-card reveal">
         <div class="s-icon">📅</div>
         <h3>Books the appointment live</h3>
         <p>SmartBook checks your real-time availability and books the patient directly into your schedule. No callback needed. The slot is filled before they hang up.</p>
       </div>
 
-      <div class="solution-card">
+      <div class="solution-card reveal">
         <div class="s-icon">💬</div>
         <h3>SMS confirmation + reminders</h3>
         <p>Automatically texts the patient a confirmation with their appointment details. Follow-up reminders cut no-shows without your team lifting a finger.</p>
       </div>
 
-      <div class="solution-card">
+      <div class="solution-card reveal">
         <div class="s-icon">🔗</div>
         <h3>Syncs with your schedule</h3>
         <p>Connects to your practice management software. No double-booking, no manual entry. SmartBook reads your availability and fills it — that's it.</p>
@@ -703,32 +786,32 @@
   <!-- ROI BANNER -->
   <div class="roi-banner">
     <div class="roi-card">
-      <h2>1 missed new patient = <em>$2,000+ lifetime value.</em><br />SmartBook pays for itself in week 1.</h2>
+      <h2 class="reveal">1 missed new patient = <em>$2,000+ lifetime value.</em><br />SmartBook pays for itself in week 1.</h2>
 
       <div class="roi-facts">
-        <div class="roi-fact">
-          <strong>$2,000+</strong>
+        <div class="roi-fact reveal">
+          <strong data-countup="2000" data-prefix="$" data-suffix="+">$2,000+</strong>
           <span>Avg patient lifetime value</span>
         </div>
-        <div class="roi-fact">
-          <strong>23%</strong>
+        <div class="roi-fact reveal">
+          <strong data-countup="23" data-prefix="" data-suffix="%">23%</strong>
           <span>Calls missed on average</span>
         </div>
-        <div class="roi-fact">
-          <strong>$497</strong>
+        <div class="roi-fact reveal">
+          <strong data-countup="497" data-prefix="$" data-suffix="">$497</strong>
           <span>Monthly cost of SmartBook</span>
         </div>
-        <div class="roi-fact">
+        <div class="roi-fact reveal">
           <strong>1 patient</strong>
           <span>To cover month 1</span>
         </div>
       </div>
 
-      <p style="color:rgba(255,255,255,0.7); font-size:0.95rem; max-width:500px; margin:0 auto 2rem;">
+      <p class="reveal" style="color:rgba(255,255,255,0.7); font-size:0.95rem; max-width:500px; margin:0 auto 2rem;">
         If you see 80 new patient calls a month and miss 23% of them, that's 18 missed patients. At $2,000 lifetime value each — that's $36,000 walking out the door every month. SmartBook costs $497.
       </p>
 
-      <a href="https://buy.stripe.com/dRm7sK6kAe6Pfs75oL3F604" class="btn-primary" style="font-size:1rem;">
+      <a href="https://buy.stripe.com/dRm7sK6kAe6Pfs75oL3F604" class="btn-primary reveal" style="font-size:1rem;">
         See a live demo →
       </a>
 
@@ -742,7 +825,7 @@
     <h2>One flat fee. No surprises.</h2>
     <p class="section-sub">No per-minute charges. No setup complexity. Just one price that covers everything.</p>
 
-    <div class="price-card">
+    <div class="price-card reveal">
       <div class="price-label">SmartBook AI — Dental</div>
       <div class="price-main">
         <span class="currency">$</span>
@@ -782,6 +865,90 @@
     <div class="footer-logo">SmartBook <span>AI</span></div>
     <p>© 2026 SmartBook AI · hello@pantrymate.net · $497/mo · No contracts</p>
   </footer>
+
+  <script>
+    // ── SCROLL REVEAL ──
+    (function () {
+      // Stagger grid children
+      document.querySelectorAll('.solution-grid, .roi-facts').forEach(function (grid) {
+        var children = grid.querySelectorAll('.reveal');
+        children.forEach(function (child, i) {
+          child.style.transitionDelay = (i * 0.05) + 's';
+        });
+      });
+
+      // Also stagger timeline items
+      var timelineItems = document.querySelectorAll('.pain-timeline .timeline-item.reveal');
+      timelineItems.forEach(function (item, i) {
+        item.style.transitionDelay = (i * 0.08) + 's';
+      });
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            // Trigger count-up for stat elements
+            var strong = entry.target.querySelector('[data-countup]') || (entry.target.dataset.countup !== undefined ? entry.target : null);
+            if (strong) triggerCountUp(strong);
+            // Also check if the element itself is the countup target
+            if (entry.target.dataset.countup !== undefined) {
+              triggerCountUp(entry.target);
+            }
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        io.observe(el);
+      });
+    })();
+
+    // ── COUNT UP ──
+    function triggerCountUp(el) {
+      if (el._counted) return;
+      el._counted = true;
+
+      var target = parseInt(el.dataset.countup, 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      if (isNaN(target) || target === 0) return;
+
+      var duration = 1400;
+      var startTime = null;
+
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var elapsed = timestamp - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = easeOutCubic(progress);
+        var current = Math.round(eased * target);
+        // Format with commas for thousands
+        var formatted = current >= 1000 ? current.toLocaleString() : current.toString();
+        el.textContent = prefix + formatted + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    // Watch countup elements individually (they're inside .reveal, but observe directly too)
+    (function () {
+      var countEls = document.querySelectorAll('[data-countup]');
+      var io2 = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            triggerCountUp(entry.target);
+            io2.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      countEls.forEach(function (el) { io2.observe(el); });
+    })();
+  </script>
 
 </body>
 </html>
