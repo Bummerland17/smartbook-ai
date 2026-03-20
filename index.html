@@ -1,8 +1,362 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" style="overflow-x:hidden;">
 <head>
-<meta http-equiv="refresh" content="0; url=dental.html">
-<title>SmartBook AI</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SmartBook AI — Your Front Desk After Hours</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+*{box-sizing:border-box;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#fafaf9;color:#1c2b3a;margin:0;overflow-x:hidden;}
+h1,h2,h3,h4,.serif{font-family:'Lora',serif;}
+:root{scroll-behavior:smooth;}
+.teal{color:#0d9488;}
+.teal-bg{background:#0d9488;}
+@keyframes fade-up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fade-up 0.7s ease forwards;}
+.fade-up-2{animation:fade-up 0.7s 0.12s ease forwards;opacity:0;}
+.fade-up-3{animation:fade-up 0.7s 0.24s ease forwards;opacity:0;}
+.card{background:#fff;border:1px solid #e8eeec;border-radius:14px;}
+.pill{background:rgba(13,148,136,0.08);border:1px solid rgba(13,148,136,0.2);color:#0d9488;font-size:0.72rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:100px;display:inline-block;font-family:'Plus Jakarta Sans',sans-serif;}
+.nav-link{color:#64748b;font-size:0.8rem;font-weight:600;text-decoration:none;transition:color 0.15s;}
+.nav-link:hover{color:#1c2b3a;}
+.divider{height:1px;background:#e8eeec;}
+#mobile-menu.open{display:block !important;}
+</style>
 </head>
-<body><a href="dental.html">SmartBook AI — Dental</a></body>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(250,250,249,0.97);border-bottom:1px solid #e8eeec;backdrop-filter:blur(12px);">
+  <div style="max-width:1150px;margin:0 auto;padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;height:64px;">
+    <a href="index.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;">
+      <div style="width:32px;height:32px;background:#0d9488;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <i data-lucide="calendar-check" style="width:17px;height:17px;color:#fff;"></i>
+      </div>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.05rem;color:#1c2b3a;letter-spacing:-0.01em;">Smart<span style="color:#0d9488;">Book</span> AI</span>
+    </a>
+    <div class="hidden md:flex" style="align-items:center;gap:2rem;">
+      <a href="#how-it-works" class="nav-link">How It Works</a>
+      <a href="#who" class="nav-link">Who It's For</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+    </div>
+    <div class="hidden md:flex" style="align-items:center;gap:0.75rem;">
+      <a href="https://buy.stripe.com/cNi4gygZC3RGf6D15absc03" target="_blank" rel="noopener" style="color:#0d9488;font-weight:700;font-size:0.82rem;text-decoration:none;padding:0.55rem 1.1rem;border:1px solid rgba(13,148,136,0.3);border-radius:7px;transition:all 0.15s;" onmouseover="this.style.borderColor='rgba(13,148,136,0.7)'" onmouseout="this.style.borderColor='rgba(13,148,136,0.3)'">See Pricing</a>
+      <a href="https://buy.stripe.com/cNi4gygZC3RGf6D15absc03" target="_blank" rel="noopener" style="background:#0d9488;color:#fff;font-weight:700;font-size:0.82rem;padding:0.6rem 1.25rem;border-radius:7px;text-decoration:none;display:flex;align-items:center;gap:6px;min-height:40px;transition:background 0.15s;" onmouseover="this.style.background='#0b7a72'" onmouseout="this.style.background='#0d9488'">Get Started</a>
+    </div>
+    <button id="hamburger" class="md:hidden" onclick="toggleMenu()" style="background:transparent;border:1px solid #e8eeec;border-radius:7px;padding:0.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;" aria-label="Open menu">
+      <i data-lucide="menu" id="menu-icon" style="width:20px;height:20px;color:#1c2b3a;"></i>
+    </button>
+  </div>
+</nav>
+<div id="mobile-menu" style="background:#fafaf9;border-top:1px solid #e8eeec;padding:1.25rem;position:fixed;top:64px;left:0;right:0;z-index:49;display:none;">
+    <div style="display:flex;flex-direction:column;gap:0.25rem;">
+      <a href="#how-it-works" onclick="closeMenu()" style="color:#64748b;font-size:1rem;font-weight:600;padding:0.85rem 1rem;border-radius:8px;text-decoration:none;display:block;transition:background 0.15s;" onmouseover="this.style.background='rgba(13,148,136,0.06)'" onmouseout="this.style.background='transparent'">How It Works</a>
+      <a href="#who" onclick="closeMenu()" style="color:#64748b;font-size:1rem;font-weight:600;padding:0.85rem 1rem;border-radius:8px;text-decoration:none;display:block;transition:background 0.15s;" onmouseover="this.style.background='rgba(13,148,136,0.06)'" onmouseout="this.style.background='transparent'">Who It's For</a>
+      <a href="#pricing" onclick="closeMenu()" style="color:#64748b;font-size:1rem;font-weight:600;padding:0.85rem 1rem;border-radius:8px;text-decoration:none;display:block;transition:background 0.15s;" onmouseover="this.style.background='rgba(13,148,136,0.06)'" onmouseout="this.style.background='transparent'">Pricing</a>
+      <div style="height:1px;background:#e8eeec;margin:0.5rem 0;"></div>
+      <a href="https://buy.stripe.com/cNi4gygZC3RGf6D15absc03" target="_blank" rel="noopener" style="background:#0d9488;color:#fff;font-weight:700;font-size:1rem;padding:0.9rem 1rem;border-radius:8px;text-decoration:none;display:block;text-align:center;min-height:48px;line-height:1.8;">Get Started — $497/mo</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<section style="padding-top:64px;background:linear-gradient(160deg,#f0faf9 0%,#fafaf9 50%,#fff 100%);min-height:100vh;display:flex;align-items:center;">
+  <div style="max-width:1150px;margin:0 auto;padding:4.5rem 1.25rem 4rem;width:100%;">
+    <div style="max-width:760px;">
+      <div class="pill fade-up" style="margin-bottom:1.5rem;">AI Phone Receptionist for Healthcare &amp; Wellness</div>
+      <h1 class="fade-up-2" style="font-size:clamp(2.4rem,7vw,5rem);font-weight:600;line-height:1.1;letter-spacing:-0.02em;margin:0 0 1.5rem;color:#0f1f2d;">
+        Your front desk handles 9-5.<br>
+        <span style="color:#0d9488;">We handle the rest.</span>
+      </h1>
+      <p class="fade-up-3" style="font-size:clamp(1rem,2.5vw,1.2rem);line-height:1.75;color:#64748b;max-width:540px;margin:0 0 2.5rem;">
+        SmartBook AI answers every call that comes in after hours, books appointments, and sends reminders — so your patients and clients never hit voicemail.
+      </p>
+      <div class="fade-up-3" style="display:flex;flex-direction:column;gap:0.9rem;max-width:400px;margin-bottom:2.5rem;">
+        <a href="https://buy.stripe.com/cNi4gygZC3RGf6D15absc03" target="_blank" rel="noopener" style="background:#0d9488;color:#fff;font-weight:700;font-size:1.05rem;padding:1rem 2rem;border-radius:10px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:9px;min-height:56px;width:100%;box-shadow:0 4px 20px rgba(13,148,136,0.25);transition:all 0.15s;" onmouseover="this.style.background='#0b7a72'" onmouseout="this.style.background='#0d9488'">
+          Get Started — $497/mo <i data-lucide="arrow-right" style="width:17px;height:17px;"></i>
+        </a>
+        <a href="#how-it-works" style="background:rgba(13,148,136,0.06);border:1px solid rgba(13,148,136,0.2);color:#0d9488;font-weight:600;font-size:1.05rem;padding:1rem 2rem;border-radius:10px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:9px;min-height:56px;width:100%;transition:all 0.15s;" onmouseover="this.style.background='rgba(13,148,136,0.12)'" onmouseout="this.style.background='rgba(13,148,136,0.06)'">
+          See How It Works
+        </a>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:1.25rem;">
+        <span style="color:#94a3b8;font-size:0.82rem;font-weight:600;display:flex;align-items:center;gap:5px;"><i data-lucide="check-circle" style="width:14px;height:14px;color:#0d9488;"></i> $197 one-time setup</span>
+        <span style="color:#94a3b8;font-size:0.82rem;font-weight:600;display:flex;align-items:center;gap:5px;"><i data-lucide="check-circle" style="width:14px;height:14px;color:#0d9488;"></i> Live in 48 hours</span>
+        <span style="color:#94a3b8;font-size:0.82rem;font-weight:600;display:flex;align-items:center;gap:5px;"><i data-lucide="check-circle" style="width:14px;height:14px;color:#0d9488;"></i> Cancel anytime</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STATS -->
+<div style="background:#fff;">
+  <div style="max-width:1150px;margin:0 auto;padding:0 1.25rem;">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);" class="md:grid-cols-4">
+      <div style="padding:2rem 1.5rem;border-right:1px solid #f0f4f3;border-bottom:1px solid #f0f4f3;text-align:center;">
+        <div style="font-family:'Lora',serif;font-size:clamp(2rem,5vw,2.6rem);font-weight:600;color:#0d9488;line-height:1;">24/7</div>
+        <div style="color:#94a3b8;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:6px;">After-Hours Coverage</div>
+      </div>
+      <div style="padding:2rem 1.5rem;border-bottom:1px solid #f0f4f3;text-align:center;">
+        <div style="font-family:'Lora',serif;font-size:clamp(2rem,5vw,2.6rem);font-weight:600;color:#0d9488;line-height:1;">&lt;1s</div>
+        <div style="color:#94a3b8;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:6px;">Answer Time</div>
+      </div>
+      <div style="padding:2rem 1.5rem;border-right:1px solid #f0f4f3;text-align:center;">
+        <div style="font-family:'Lora',serif;font-size:clamp(2rem,5vw,2.6rem);font-weight:600;color:#0d9488;line-height:1;">41%</div>
+        <div style="color:#94a3b8;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:6px;">Fewer Missed Appts</div>
+      </div>
+      <div style="padding:2rem 1.5rem;text-align:center;">
+        <div style="font-family:'Lora',serif;font-size:clamp(2rem,5vw,2.6rem);font-weight:600;color:#0d9488;line-height:1;">500+</div>
+        <div style="color:#94a3b8;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:6px;">Practices Running</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHO IT'S FOR -->
+<section id="who" style="padding:5rem 1.25rem;background:#fafaf9;">
+  <div style="max-width:1150px;margin:0 auto;">
+    <div style="max-width:560px;margin:0 auto 3rem;text-align:center;">
+      <div class="pill" style="margin-bottom:1rem;">Who It's For</div>
+      <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:600;color:#0f1f2d;line-height:1.2;margin:0;letter-spacing:-0.01em;">Built for appointment-driven businesses.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;" class="md:grid-cols-3">
+      <div class="card" style="padding:2rem;">
+        <div style="width:48px;height:48px;background:#f0faf9;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;"><i data-lucide="stethoscope" style="width:22px;height:22px;color:#0d9488;"></i></div>
+        <h3 style="font-size:1rem;font-weight:700;color:#0f1f2d;margin:0 0 0.5rem;">Dental &amp; Medical</h3>
+        <p style="color:#64748b;font-size:0.88rem;line-height:1.65;margin:0;">Patients call after hours, on weekends, between appointments. The AI books them in, sends reminders, and handles cancellations — no front desk overtime.</p>
+      </div>
+      <div class="card" style="padding:2rem;">
+        <div style="width:48px;height:48px;background:#f0faf9;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;"><i data-lucide="dumbbell" style="width:22px;height:22px;color:#0d9488;"></i></div>
+        <h3 style="font-size:1rem;font-weight:700;color:#0f1f2d;margin:0 0 0.5rem;">Gyms &amp; Studios</h3>
+        <p style="color:#64748b;font-size:0.88rem;line-height:1.65;margin:0;">Class inquiries, membership questions, trial bookings. The AI handles new member intake while your staff is on the floor training people.</p>
+      </div>
+      <div class="card" style="padding:2rem;">
+        <div style="width:48px;height:48px;background:#f0faf9;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;"><i data-lucide="sparkles" style="width:22px;height:22px;color:#0d9488;"></i></div>
+        <h3 style="font-size:1rem;font-weight:700;color:#0f1f2d;margin:0 0 0.5rem;">Spas &amp; Salons</h3>
+        <p style="color:#64748b;font-size:0.88rem;line-height:1.65;margin:0;">Appointment requests that come in evenings and weekends — which is most of them. Clients booked, preferences noted, confirmation sent automatically.</p>
+      </div>
+      <div class="card" style="padding:2rem;">
+        <div style="width:48px;height:48px;background:#f0faf9;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;"><i data-lucide="paw-print" style="width:22px;height:22px;color:#0d9488;"></i></div>
+        <h3 style="font-size:1rem;font-weight:700;color:#0f1f2d;margin:0 0 0.5rem;">Veterinary Clinics</h3>
+        <p style="color:#64748b;font-size:0.88rem;line-height:1.65;margin:0;">Pet owners panic-call at all hours. The AI triages urgency, books wellness appointments, and escalates genuine emergencies to the on-call line.</p>
+      </div>
+      <div class="card" style="padding:2rem;">
+        <div style="width:48px;height:48px;background:#f0faf9;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;"><i data-lucide="brain" style="width:22px;height:22px;color:#0d9488;"></i></div>
+        <h3 style="font-size:1rem;font-weight:700;color:#0f1f2d;margin:0 0 0.5rem;">Mental Health Practices</h3>
+        <p style="color:#64748b;font-size:0.88rem;line-height:1.65;margin:0;">New patient intake, scheduling, insurance questions. The AI handles the administrative load so your therapists can focus on the people in the room.</p>
+      </div>
+      <div class="card" style="padding:2rem;">
+        <div style="width:48px;height:48px;background:#f0faf9;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;"><i data-lucide="heart-pulse" style="width:22px;height:22px;color:#0d9488;"></i></div>
+        <h3 style="font-size:1rem;font-weight:700;color:#0f1f2d;margin:0 0 0.5rem;">Physical Therapy</h3>
+        <p style="color:#64748b;font-size:0.88rem;line-height:1.65;margin:0;">Referral intake, appointment scheduling, follow-up booking. Fewer no-shows because reminders actually go out. Less administrative burden on your front desk staff.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" style="padding:5rem 1.25rem;background:#fff;">
+  <div style="max-width:1150px;margin:0 auto;">
+    <div style="max-width:520px;margin:0 auto 3rem;text-align:center;">
+      <div class="pill" style="margin-bottom:1rem;">How It Works</div>
+      <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:600;color:#0f1f2d;line-height:1.2;margin:0;letter-spacing:-0.01em;">Running in 48 hours.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;max-width:800px;margin:0 auto;" class="md:grid-cols-2">
+      <div class="card" style="padding:1.75rem;display:flex;align-items:flex-start;gap:1rem;">
+        <div style="width:36px;height:36px;background:#f0faf9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Lora',serif;font-weight:600;color:#0d9488;font-size:0.95rem;border:1px solid rgba(13,148,136,0.2);">1</div>
+        <div>
+          <h4 style="font-size:0.95rem;font-weight:700;color:#0f1f2d;margin:0 0 0.4rem;">We build your AI in one call</h4>
+          <p style="color:#64748b;font-size:0.87rem;line-height:1.6;margin:0;">30 minutes with us. We learn your scheduling rules, your tone, your common questions. The AI is trained to sound like your practice.</p>
+        </div>
+      </div>
+      <div class="card" style="padding:1.75rem;display:flex;align-items:flex-start;gap:1rem;">
+        <div style="width:36px;height:36px;background:#f0faf9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Lora',serif;font-weight:600;color:#0d9488;font-size:0.95rem;border:1px solid rgba(13,148,136,0.2);">2</div>
+        <div>
+          <h4 style="font-size:0.95rem;font-weight:700;color:#0f1f2d;margin:0 0 0.4rem;">Your number forwards after hours</h4>
+          <p style="color:#64748b;font-size:0.87rem;line-height:1.6;margin:0;">No new number to communicate. Calls forward to the AI at 5pm and back at 9am. Your main line stays the same.</p>
+        </div>
+      </div>
+      <div class="card" style="padding:1.75rem;display:flex;align-items:flex-start;gap:1rem;">
+        <div style="width:36px;height:36px;background:#f0faf9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Lora',serif;font-weight:600;color:#0d9488;font-size:0.95rem;border:1px solid rgba(13,148,136,0.2);">3</div>
+        <div>
+          <h4 style="font-size:0.95rem;font-weight:700;color:#0f1f2d;margin:0 0 0.4rem;">Patients are booked, not voicemailed</h4>
+          <p style="color:#64748b;font-size:0.87rem;line-height:1.6;margin:0;">Every caller gets a real conversation. Appointments booked directly into your system. Confirmation texts sent automatically.</p>
+        </div>
+      </div>
+      <div class="card" style="padding:1.75rem;display:flex;align-items:flex-start;gap:1rem;">
+        <div style="width:36px;height:36px;background:#f0faf9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Lora',serif;font-weight:600;color:#0d9488;font-size:0.95rem;border:1px solid rgba(13,148,136,0.2);">4</div>
+        <div>
+          <h4 style="font-size:0.95rem;font-weight:700;color:#0f1f2d;margin:0 0 0.4rem;">Morning summary in your inbox</h4>
+          <p style="color:#64748b;font-size:0.87rem;line-height:1.6;margin:0;">Every morning, a digest of who called, what was booked, and any flagged follow-ups. Your team walks in ready.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section style="padding:5rem 1.25rem;background:#fafaf9;">
+  <div style="max-width:1150px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr;gap:4rem;align-items:center;" class="md:grid-cols-2">
+      <div>
+        <div class="pill" style="margin-bottom:1.25rem;">What's Included</div>
+        <h2 style="font-size:clamp(2rem,5vw,2.8rem);font-weight:600;color:#0f1f2d;line-height:1.2;margin:0 0 1.25rem;letter-spacing:-0.01em;">Everything your front desk does, after hours.</h2>
+        <p style="color:#64748b;font-size:1rem;line-height:1.75;margin:0 0 2rem;">One flat monthly fee. No per-call charges. No hidden fees. Everything listed below is included in the base plan.</p>
+        <a href="https://buy.stripe.com/cNi4gygZC3RGf6D15absc03" target="_blank" rel="noopener" style="background:#0d9488;color:#fff;font-weight:700;font-size:0.95rem;padding:0.9rem 1.75rem;border-radius:9px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;min-height:48px;transition:background 0.15s;box-shadow:0 4px 16px rgba(13,148,136,0.2);" onmouseover="this.style.background='#0b7a72'" onmouseout="this.style.background='#0d9488'">
+          Start Today <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.85rem;">
+        <div class="card" style="padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;">
+          <i data-lucide="check-circle" style="width:18px;height:18px;color:#0d9488;flex-shrink:0;"></i>
+          <span style="font-size:0.9rem;font-weight:600;color:#1c2b3a;">24/7 live AI call answering</span>
+        </div>
+        <div class="card" style="padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;">
+          <i data-lucide="check-circle" style="width:18px;height:18px;color:#0d9488;flex-shrink:0;"></i>
+          <span style="font-size:0.9rem;font-weight:600;color:#1c2b3a;">Appointment booking &amp; calendar sync</span>
+        </div>
+        <div class="card" style="padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;">
+          <i data-lucide="check-circle" style="width:18px;height:18px;color:#0d9488;flex-shrink:0;"></i>
+          <span style="font-size:0.9rem;font-weight:600;color:#1c2b3a;">Appointment reminder texts to patients</span>
+        </div>
+        <div class="card" style="padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;">
+          <i data-lucide="check-circle" style="width:18px;height:18px;color:#0d9488;flex-shrink:0;"></i>
+          <span style="font-size:0.9rem;font-weight:600;color:#1c2b3a;">Cancellation &amp; rescheduling handling</span>
+        </div>
+        <div class="card" style="padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;">
+          <i data-lucide="check-circle" style="width:18px;height:18px;color:#0d9488;flex-shrink:0;"></i>
+          <span style="font-size:0.9rem;font-weight:600;color:#1c2b3a;">Morning call summary emailed to you</span>
+        </div>
+        <div class="card" style="padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;">
+          <i data-lucide="check-circle" style="width:18px;height:18px;color:#0d9488;flex-shrink:0;"></i>
+          <span style="font-size:0.9rem;font-weight:600;color:#1c2b3a;">Emergency escalation routing</span>
+        </div>
+        <div class="card" style="padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;">
+          <i data-lucide="check-circle" style="width:18px;height:18px;color:#0d9488;flex-shrink:0;"></i>
+          <span style="font-size:0.9rem;font-weight:600;color:#1c2b3a;">Full call transcripts &amp; logs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<section style="padding:5rem 1.25rem;background:#fff;">
+  <div style="max-width:1150px;margin:0 auto;">
+    <div style="max-width:520px;margin:0 auto 3rem;text-align:center;">
+      <div class="pill" style="margin-bottom:1rem;">From the Field</div>
+      <h2 style="font-size:clamp(2rem,5vw,2.8rem);font-weight:600;color:#0f1f2d;line-height:1.2;margin:0;letter-spacing:-0.01em;">What practices say after month one.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;" class="md:grid-cols-3">
+      <div class="card" style="padding:2rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0d9488,#34d399);"></div>
+        <p style="color:#475569;font-size:0.95rem;line-height:1.7;margin:0 0 1.5rem;font-style:italic;">"We were losing 20-30 appointment requests every week after close. SmartBook caught all of them. The first month it paid for itself in the first three days."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div style="width:38px;height:38px;background:#f0faf9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i data-lucide="user" style="width:16px;height:16px;color:#0d9488;"></i></div>
+          <div><div style="font-weight:700;color:#0f1f2d;font-size:0.9rem;">Dr. Amanda H.</div><div style="color:#94a3b8;font-size:0.8rem;">Dental Practice, Arizona</div></div>
+        </div>
+      </div>
+      <div class="card" style="padding:2rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0d9488,#34d399);"></div>
+        <p style="color:#475569;font-size:0.95rem;line-height:1.7;margin:0 0 1.5rem;font-style:italic;">"My front desk used to spend 2 hours every morning returning calls. Now they walk in to a summary email and just confirm the bookings. Total shift."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div style="width:38px;height:38px;background:#f0faf9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i data-lucide="user" style="width:16px;height:16px;color:#0d9488;"></i></div>
+          <div><div style="font-weight:700;color:#0f1f2d;font-size:0.9rem;">Karen B.</div><div style="color:#94a3b8;font-size:0.8rem;">Physical Therapy Clinic, Colorado</div></div>
+        </div>
+      </div>
+      <div class="card" style="padding:2rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0d9488,#34d399);"></div>
+        <p style="color:#475569;font-size:0.95rem;line-height:1.7;margin:0 0 1.5rem;font-style:italic;">"Pet emergencies don't care what time it is. Now every after-hours call gets handled — real emergencies routed to the on-call vet, routine stuff booked in automatically."</p>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div style="width:38px;height:38px;background:#f0faf9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i data-lucide="user" style="width:16px;height:16px;color:#0d9488;"></i></div>
+          <div><div style="font-weight:700;color:#0f1f2d;font-size:0.9rem;">Dr. Rob T.</div><div style="color:#94a3b8;font-size:0.8rem;">Veterinary Clinic, Utah</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section id="pricing" style="padding:5rem 1.25rem;background:#f0faf9;">
+  <div style="max-width:560px;margin:0 auto;text-align:center;">
+    <div class="pill" style="margin-bottom:1rem;">Pricing</div>
+    <h2 style="font-size:clamp(2rem,5vw,2.8rem);font-weight:600;color:#0f1f2d;line-height:1.2;margin:0 0 2.5rem;letter-spacing:-0.01em;">One plan. No surprises.</h2>
+    <div class="card" style="padding:2.5rem;box-shadow:0 8px 40px rgba(13,148,136,0.1);border-color:rgba(13,148,136,0.2);">
+      <div style="font-family:'Lora',serif;font-size:3.5rem;font-weight:600;color:#0d9488;line-height:1;margin-bottom:0.25rem;">$497</div>
+      <div style="color:#94a3b8;font-size:0.9rem;margin-bottom:0.5rem;">per month</div>
+      <div style="background:rgba(13,148,136,0.08);border-radius:6px;padding:0.5rem;color:#0d9488;font-size:0.85rem;font-weight:600;margin-bottom:2rem;">+ $197 one-time setup fee</div>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;text-align:left;margin-bottom:2rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="check" style="width:16px;height:16px;color:#0d9488;flex-shrink:0;"></i><span style="font-size:0.9rem;color:#334155;">24/7 AI call answering — unlimited calls</span></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="check" style="width:16px;height:16px;color:#0d9488;flex-shrink:0;"></i><span style="font-size:0.9rem;color:#334155;">Appointment booking &amp; calendar integration</span></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="check" style="width:16px;height:16px;color:#0d9488;flex-shrink:0;"></i><span style="font-size:0.9rem;color:#334155;">Automated patient reminders</span></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="check" style="width:16px;height:16px;color:#0d9488;flex-shrink:0;"></i><span style="font-size:0.9rem;color:#334155;">Emergency call escalation</span></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="check" style="width:16px;height:16px;color:#0d9488;flex-shrink:0;"></i><span style="font-size:0.9rem;color:#334155;">Full transcripts &amp; morning summary</span></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="check" style="width:16px;height:16px;color:#0d9488;flex-shrink:0;"></i><span style="font-size:0.9rem;color:#334155;">Dedicated setup &amp; support</span></div>
+      </div>
+      <a href="https://buy.stripe.com/cNi4gygZC3RGf6D15absc03" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:9px;background:#0d9488;color:#fff;font-weight:700;font-size:1.05rem;padding:1rem 2rem;border-radius:9px;text-decoration:none;min-height:56px;width:100%;box-shadow:0 4px 20px rgba(13,148,136,0.25);transition:background 0.15s;" onmouseover="this.style.background='#0b7a72'" onmouseout="this.style.background='#0d9488'">
+        Get Started <i data-lucide="arrow-right" style="width:17px;height:17px;"></i>
+      </a>
+      <p style="color:#94a3b8;font-size:0.8rem;margin:1rem 0 0;">No annual commitment. Cancel anytime with 30 days notice.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section style="padding:5rem 1.25rem;background:#fff;">
+  <div style="max-width:640px;margin:0 auto;text-align:center;">
+    <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:600;color:#0f1f2d;line-height:1.15;margin:0 0 1rem;letter-spacing:-0.01em;">Stop losing patients to voicemail.</h2>
+    <p style="color:#64748b;font-size:1rem;line-height:1.75;margin:0 0 2.5rem;">Live in 48 hours. No technical setup needed on your end.</p>
+    <a href="https://buy.stripe.com/cNi4gygZC3RGf6D15absc03" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:9px;background:#0d9488;color:#fff;font-weight:700;font-size:1.05rem;padding:1rem 2.25rem;border-radius:9px;text-decoration:none;min-height:56px;box-shadow:0 4px 20px rgba(13,148,136,0.25);transition:background 0.15s;" onmouseover="this.style.background='#0b7a72'" onmouseout="this.style.background='#0d9488'">
+      Get Started Today <i data-lucide="arrow-right" style="width:17px;height:17px;"></i>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#fafaf9;border-top:1px solid #e8eeec;padding:2.25rem 1.25rem;">
+  <div style="max-width:1150px;margin:0 auto;display:flex;flex-direction:column;gap:1.25rem;align-items:center;text-align:center;" class="md:flex-row md:justify-between">
+    <div style="display:flex;align-items:center;gap:9px;">
+      <div style="width:26px;height:26px;background:#0d9488;border-radius:6px;display:flex;align-items:center;justify-content:center;"><i data-lucide="calendar-check" style="width:13px;height:13px;color:#fff;"></i></div>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#1c2b3a;">SmartBook AI</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1.75rem;">
+      <a href="#how-it-works" style="color:#94a3b8;font-size:0.82rem;text-decoration:none;font-weight:500;transition:color 0.15s;" onmouseover="this.style.color='#1c2b3a'" onmouseout="this.style.color='#94a3b8'">How It Works</a>
+      <a href="#who" style="color:#94a3b8;font-size:0.82rem;text-decoration:none;font-weight:500;transition:color 0.15s;" onmouseover="this.style.color='#1c2b3a'" onmouseout="this.style.color='#94a3b8'">Who It's For</a>
+      <a href="#pricing" style="color:#94a3b8;font-size:0.82rem;text-decoration:none;font-weight:500;transition:color 0.15s;" onmouseover="this.style.color='#1c2b3a'" onmouseout="this.style.color='#94a3b8'">Pricing</a>
+    </div>
+    <div style="color:#cbd5e1;font-size:0.78rem;">2025 SmartBook AI. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobile-menu');
+  var icon=document.getElementById('menu-icon');
+  var open=m.classList.toggle('open');
+  if(open){icon.setAttribute('data-lucide','x');}else{icon.setAttribute('data-lucide','menu');}
+  lucide.createIcons();
+}
+function closeMenu(){
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('menu-icon').setAttribute('data-lucide','menu');
+  lucide.createIcons();
+}
+lucide.createIcons();
+</script>
+</body>
 </html>
